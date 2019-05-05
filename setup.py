@@ -18,6 +18,10 @@ class CopyLibFile(install):
     def run(self):
         install_dir = get_python_lib()
         lib_file = glob.glob(__library_file__)
+        
+        if len(lib_file) == 0:
+            lib_file = glob.glob('./bin/Release/g2o*.pyd')
+        
         assert len(lib_file) == 1     
 
         print('copying {} -> {}'.format(lib_file[0], install_dir))

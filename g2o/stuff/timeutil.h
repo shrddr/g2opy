@@ -78,12 +78,20 @@ if (1) {\
 
 namespace g2o {
 
-#ifdef _WINDOWS
-typedef struct timeval {
+struct timeval1 {
   long tv_sec;
   long tv_usec;
-} timeval;
-G2O_STUFF_API int gettimeofday(struct timeval *tv, struct timezone *tz);
+};
+
+struct timezone1
+{
+  int  tz_minuteswest; /* minutes W of Greenwich */
+  int  tz_dsttime;     /* type of dst correction */
+};
+
+#ifdef _WINDOWS
+
+G2O_STUFF_API int gettimeofday(struct timeval1 *tv, struct timezone1 *tz);
 #endif
 
 /**
@@ -91,7 +99,7 @@ G2O_STUFF_API int gettimeofday(struct timeval *tv, struct timezone *tz);
  */
 inline double get_time() 
 {
-  struct timeval ts;
+  struct timeval1 ts;
   gettimeofday(&ts,0);
   return ts.tv_sec + ts.tv_usec*1e-6;
 }

@@ -260,10 +260,12 @@ IF(MSVC)
   add_definitions("/wd4267") # Conversion during return
   add_definitions("/wd4522") # Duplicated operator=() in Eigen headers
 
-ENDIF(MSVC)
+ELSE()
 
-SET(g2o_C_FLAGS "${g2o_C_FLAGS} -fPIC")   # added for python binding
-SET(g2o_CXX_FLAGS "${g2o_CXX_FLAGS} -fPIC")   # added for python binding
+  SET(g2o_C_FLAGS "${g2o_C_FLAGS} -fPIC")   # added for python binding
+  SET(g2o_CXX_FLAGS "${g2o_CXX_FLAGS} -fPIC")   # added for python binding
+
+ENDIF(MSVC)
 
 # C++11 support
 set(CMAKE_CXX_STANDARD 11)
