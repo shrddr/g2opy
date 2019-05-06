@@ -34,7 +34,7 @@ Tested under Ubuntu 16.04, Python 3.6+.
 Builds successfully with cmake-gui and MSVC 2017, follow this:
 
 * when specifying the generator in cmake-gui, pick x64 platform. consequently you also need python-x64. 32bit target will require a 32bit compiler which has a 4Gb memory limit (see below)
-* latest eigen release will not work, use 3.3.4 instead
+* latest eigen release will not work, use 3.3.4 instead (can't do that with vcpkg - just download it manually)
 * cholmod library
     * option 1 - build without it (limited functionality) - just comment out lines 4,17 in python\CMakeLists.txt and lines 10,17 in python\core\blocksolver.h
     * option 2 - build cholmod with vcpkg
