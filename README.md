@@ -1,4 +1,5 @@
-This is g2opy python bindings, fixed to build on Windows
+These are g2o python bindings, fixed to build on Windows.
+now the original g2opy readme:
 
 # g2opy
 
