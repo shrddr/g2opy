@@ -1,4 +1,21 @@
-g2o python bindings, fixed to build on Windows (might have vroken other platforms, use original [uoip/g2opy](https://github.com/uoip/g2opy) instead)
+g2o python bindings, fixed to build on Windows (might have broken other platforms, use original [uoip/g2opy](https://github.com/uoip/g2opy) instead)
+
+* when specifying the generator in cmake-gui, specify x64 platform explicitly. consequently you also need python-x64. 32bit target will require a 32bit compiler which has a 4Gb memory limit (see below)
+* latest eigen release will not work, use 3.3.4 instead (can't do that with vcpkg - just download it manually)
+* suitesparse library (cholmod and friends)
+    * option 1 - build without it (limited functionality) - just comment out lines 4,17 in python\CMakeLists.txt and lines 10,17 in python\core\blocksolver.h
+    * option 2 - build with vcpkg
+        * `set VCPKG_DEFAULT_TRIPLET=x64-windows`
+        * `vcpkg install suitesparse clapack openblas`
+        * when picking a generator for cmake, instead of "use default native compilers" select "specify toolchain file" - vcpkg\scripts\buildsystems\vcpkg.cmake
+        * untick BUILD_CSPARSE
+        * Configure, make sure cmake prints "Found CHOLMOD and its dependencies", then Generate
+    * option 3 - build manually - not recommended, remember you will also need BLAS and LAPACK
+    * option 4 - you can find prebuilt suitesparse binaries but that is also not an easy way, still need BLAS dll
+* compilation of bindings takes more than 8Gb of memory so 64-bit compiler is a must. If VS fails at "compiler out of heap", try command line instead: `"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe" g2o.sln /property:Configuration=Release`
+* if using BLAS and LAPACK, also copy their dll's from bin\Release to python\Lib\site-packages
+
+Tested with cmake-gui and MSVC 2017/2019
 
 # g2opy
 
@@ -30,25 +47,6 @@ cd ..
 python setup.py install
 ```
 Tested under Ubuntu 16.04, Python 3.6+.
-
-### Windows
-
-Builds successfully with cmake-gui and MSVC 2017/2019, follow this:
-
-* when specifying the generator in cmake-gui, specify x64 platform explicitly. consequently you also need python-x64. 32bit target will require a 32bit compiler which has a 4Gb memory limit (see below)
-* latest eigen release will not work, use 3.3.4 instead (can't do that with vcpkg - just download it manually)
-* suitesparse library (cholmod and friends)
-    * option 1 - build without it (limited functionality) - just comment out lines 4,17 in python\CMakeLists.txt and lines 10,17 in python\core\blocksolver.h
-    * option 2 - build with vcpkg
-        * `set VCPKG_DEFAULT_TRIPLET=x64-windows`
-        * `vcpkg install suitesparse clapack openblas`
-        * when picking a generator for cmake, instead of "use default native compilers" select "specify toolchain file" - vcpkg\scripts\buildsystems\vcpkg.cmake
-        * untick BUILD_CSPARSE
-        * Configure, make sure cmake prints "Found CHOLMOD and its dependencies", then Generate
-    * option 3 - build manually - not recommended, remember you will also need BLAS and LAPACK
-    * option 4 - you can find prebuilt suitesparse binaries but that is also not an easy way, still need BLAS dll
-* compilation of bindings takes more than 8Gb of memory so 64-bit compiler is a must. If VS fails at "compiler out of heap", try command line instead: `"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe" g2o.sln /property:Configuration=Release`
-* if using BLAS and LAPACK, also copy their dll's from bin\Release to python\Lib\site-packages
 
 ## Get Started
 The code snippets below show the core parts of BA and Pose Graph Optimization in a SLAM system.
