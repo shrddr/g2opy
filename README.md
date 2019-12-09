@@ -1,4 +1,4 @@
-g2o python bindings, fixed to build on Windows.
+g2o python bindings, fixed to build on Windows (might have vroken other platforms, use original [uoip/g2opy](https://github.com/uoip/g2opy) instead)
 
 # g2opy
 
@@ -42,13 +42,12 @@ Builds successfully with cmake-gui and MSVC 2017/2019, follow this:
     * option 2 - build with vcpkg
         * `set VCPKG_DEFAULT_TRIPLET=x64-windows`
         * `vcpkg install suitesparse clapack openblas`
-        * replace cmake_modules\FindBLAS, FindCholmod, FindCSparse, FindLAPACK, FindSuiteSparse with similar files from https://github.com/RainerKuemmerle/g2o
         * when picking a generator for cmake, instead of "use default native compilers" select "specify toolchain file" - vcpkg\scripts\buildsystems\vcpkg.cmake
         * untick BUILD_CSPARSE
         * Configure, make sure cmake prints "Found CHOLMOD and its dependencies", then Generate
     * option 3 - build manually - not recommended, remember you will also need BLAS and LAPACK
     * option 4 - you can find prebuilt suitesparse binaries but that is also not an easy way, still need BLAS dll
-* compilation of bindings takes up to 8Gb of memory so 64-bit compiler is a must. If VS fails at "compiler out of heap", try command line instead: `"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe" g2o.sln /property:Configuration=Release`
+* compilation of bindings takes more than 8Gb of memory so 64-bit compiler is a must. If VS fails at "compiler out of heap", try command line instead: `"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe" g2o.sln /property:Configuration=Release`
 * if using BLAS and LAPACK, also copy their dll's from bin\Release to python\Lib\site-packages
 
 ## Get Started
