@@ -12,7 +12,7 @@ g2o python bindings, fixed to build on Windows (might have broken other platform
         * Configure, make sure cmake prints "Found CHOLMOD and its dependencies", then Generate
     * option 3 - build manually - not recommended, remember you will also need BLAS and LAPACK
     * option 4 - you can find prebuilt suitesparse binaries but that is also not an easy way, still need BLAS dll
-* compilation of bindings takes more than 8Gb of memory so 64-bit compiler is a must. If VS fails at "compiler out of heap", try command line instead: `"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe" g2o.sln /property:Configuration=Release`
+* compilation of bindings takes more than 8Gb of memory so 64-bit compiler is a must. If VS fails at "compiler out of heap", try command line instead: `"c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe" g2o.sln /property:Configuration=Release` you can also force multiple CPUs with `/m:8`
 * if using BLAS and LAPACK, also copy their dll's from bin\Release to python\Lib\site-packages
 
 Tested with cmake-gui and MSVC 2017/2019
