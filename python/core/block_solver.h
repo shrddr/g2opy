@@ -7,14 +7,14 @@
 #include <g2o/core/solver.h>
 #include <g2o/core/block_solver.h>
 
-#include <g2o/solvers/cholmod/linear_solver_cholmod.h>
+// #include <g2o/solvers/cholmod/linear_solver_cholmod.h>
 #include <g2o/solvers/csparse/linear_solver_csparse.h>
 #include <g2o/solvers/dense/linear_solver_dense.h>
 #include <g2o/solvers/eigen/linear_solver_eigen.h>
 #include <g2o/solvers/pcg/linear_solver_pcg.h>
 
 
-#define _CHOLMOD_FOUND 1
+// #define _CHOLMOD_FOUND 1
 #define _CSPARSE_FOUND 1
 #define _EIGEN_FOUND 1
 

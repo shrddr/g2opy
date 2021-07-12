@@ -1,7 +1,7 @@
 include_directories(${PROJECT_SOURCE_DIR})
 
 include_directories(${EIGEN3_INCLUDE_DIR})
-include_directories(${CHOLMOD_INCLUDE_DIR})
+#include_directories(${CHOLMOD_INCLUDE_DIR})
 include_directories(${CSPARSE_INCLUDE_DIR})
 
 
@@ -14,7 +14,7 @@ include(pybind11Tools)
 pybind11_add_module(g2o g2o.cpp)
 target_link_libraries(g2o PRIVATE 
     core
-    solver_cholmod
+    #solver_cholmod
     solver_csparse
     solver_eigen
     solver_dense
