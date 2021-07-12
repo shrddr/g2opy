@@ -1,7 +1,6 @@
 g2o python bindings, fixed to build on Windows (might have broken other platforms, use original [uoip/g2opy](https://github.com/uoip/g2opy) instead)
 
 * when specifying the generator in cmake-gui, specify x64 platform explicitly. consequently you also need python-x64. 32bit target will require a 32bit compiler which has a 4Gb memory limit (see below)
-* latest eigen release will not work, use 3.3.4 instead (can't do that with vcpkg - just download it manually)
 * suitesparse library (cholmod and friends)
     * option 1 - build without it (limited functionality) - just comment out lines 4,17 in python\CMakeLists.txt and lines 10,17 in python\core\blocksolver.h
     * option 2 - build with vcpkg
